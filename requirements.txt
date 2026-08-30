@@ -2,7 +2,8 @@ loguru
 matplotlib
 apollo_modules==7.0.2
 omegaconf
-docker==6.1.3
+docker==7.1.0
+websocket-client==1.8.0
 shapely
 networkx
 cyber_record

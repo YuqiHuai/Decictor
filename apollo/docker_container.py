@@ -61,7 +61,9 @@ class ApolloContainer:
         """
         try:
             return docker.from_env().containers.get(self.name).status == 'running'
-        except:
+        except Exception as e:
+            # do not hide docker client/daemon errors, they look like a stopped container
+            logger.debug(f'Cannot query container {self.name}: {e!r}')
             return False
 
     def start_container(self, restart=False, wait_time=3.0):
