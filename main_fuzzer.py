@@ -6,8 +6,12 @@ from loguru import logger
 from omegaconf import DictConfig, OmegaConf
 
 from tools.global_config import GlobalConfig
+from tools.project_paths import register_resolvers
 from tools.config_utils import load_entry_point
 from apollo.map_parser import MapParser
+
+# enable ${project_root:} in the yaml configs before hydra composes them
+register_resolvers()
 
 @hydra.main(config_path='config', config_name='main', version_base=None)
 def main(cfg: DictConfig):

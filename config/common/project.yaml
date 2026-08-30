@@ -1,6 +1,11 @@
-apollo_root: /data/d/mingfeicheng/Decictor/software/apollo
-project_root: /data/d/mingfeicheng/Decictor
-output_root: /data/d/mingfeicheng/Decictor/outputs
+# ${project_root:} is resolved automatically from the repository location
+# (see tools/project_paths.py), so these normally need no editing.
+# apollo_root can be overridden on the command line, e.g.
+#   python main_fuzzer.py common.apollo_root=/path/to/apollo
+# or through the APOLLO_ROOT environment variable.
+apollo_root: ${oc.env:APOLLO_ROOT,${project_root:}/software/apollo}
+project_root: ${project_root:}
+output_root: ${project_root:}/outputs
 
 # container - apollo
 container_record_default_folder: /apollo/outputs

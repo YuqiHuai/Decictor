@@ -4,7 +4,8 @@ import os
 
 from loguru import logger
 
-sys.path.append('/data/d/mingfeicheng/Decictor')
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(PROJECT_ROOT)
 
 from apollo.map_parser import MapParser
 
@@ -20,7 +21,7 @@ def preprocess_apollo_map(map_name: str, apollo_dir: str, map_dir: str):
     logger.info(f'Preprocessing Apollo map: {map_name} finished in {time.time() - start_time:.2f}s')
 
 if __name__ == '__main__':
-    project_root = "/data/d/mingfeicheng/Decictor"
+    project_root = PROJECT_ROOT
 
     preprocess_apollo_map('sunnyvale_loop', f'{project_root}/data', f'{project_root}/data')
     preprocess_apollo_map('sunnyvale_big_loop', f'{project_root}/data', f'{project_root}/data')

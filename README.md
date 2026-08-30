@@ -152,12 +152,19 @@ pip install torch==1.13.1+cu117 torchvision==0.14.1+cu117 torchaudio==0.13.1 --e
 ## Usage
 
 ### Path Settings
-Before using the system, configure the root directories in `config/common/project.yaml` as follows:
-```yaml
-apollo_root: [Specify the path to the Apollo root directory]
-project_root: [Specify the path to the Decictor root directory]
-output_root: [Specify the path to the output directory]
+`project_root` and `output_root` are resolved automatically from the location of this
+repository (`project_root` is the repository directory, `output_root` is `<project_root>/outputs`),
+so `config/common/project.yaml` normally needs no editing.
+
+`apollo_root` defaults to `<project_root>/software/apollo`. If your Apollo checkout lives
+elsewhere, pass it on the command line or via the `APOLLO_ROOT` environment variable:
+```aiignore
+python main_fuzzer.py common.apollo_root=/path/to/apollo ...
+# or
+export APOLLO_ROOT=/path/to/apollo
 ```
+Any of the three can still be overridden the same way, e.g. `common.output_root=/path/to/outputs`.
+
 ### Running
 After setting up the configuration, execute the following command to start Decictor:
 ```aiignore
@@ -188,7 +195,8 @@ For convenience, experiment scripts are available in the `scripts` folder:
 - To run experiments for RQ1: `bash scripts/rq1.sh`
 - To run experiments for RQ2: `bash scripts/rq2.sh`  
 
-Note that you need to update the `project_root` variable in each script before execution.
+These scripts locate the project root automatically; pass `common.apollo_root=...` (or set
+`APOLLO_ROOT`) if your Apollo checkout is not at `<project_root>/software/apollo`.
 
 
 ### Others
